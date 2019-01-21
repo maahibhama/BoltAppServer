@@ -1,0 +1,1 @@
+export const databasePath = "mongodb+srv://maahibhama:Maahi@123@boltappserver-e5hfp.gcp.mongodb.net/test?retryWrites=true"
