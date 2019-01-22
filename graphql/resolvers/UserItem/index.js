@@ -1,11 +1,11 @@
-import UserItem from "../../../models/UserItem";
+import UserItem, { CartItem } from "../../../models/UserItem";
 var mongodb = require('mongodb');
 
 export default {
     Query: {
         userItem: (root, args) => {
             return new Promise((resolve, reject) => {
-                UserItem.findOne({ userId: args.id }).exec((err, res) => {
+                UserItem.findOne({ userId: args.userId }).exec((err, res) => {
                     console.log(res)
                     err ? reject(err) : resolve(res);
                 });
@@ -40,19 +40,39 @@ export default {
             return new Promise((resolve, reject) => {
                 const id = args.userId
                 UserItem.findOne({ userId: id }).exec((err, res) => {
-                    console.log(err, res)
                     if (err) {
                         reject(err)
                     } else if (res === null) {
-                        const newUserItem = new UserItem({ userId: id, cartItems: [args.itemId] });
+                        const newCart = new CartItem({ itemId: args.itemId })
+                        const newUserItem = new UserItem({ userId: id, cartItems: [newCart] });
+                        
                         newUserItem.save((err, res) => {
                             err ? reject(err) : resolve(res);
                         });
                     } else {
+                        const filterItem = res.cartItems.filter(cartItem => {
+                            return cartItem.itemId == args.itemId
+                        })
+                        console.log("yes" + filterItem)
+                        let allItems = []
+                        if (filterItem.length > 0) {
+                            allItems = res.cartItems.map(cartItem => {
+                                if (cartItem.itemId === args.itemId) {
+                                    cartItem.count = cartItem.count + 1
+                                }
+                                return cartItem
+                            })
+                            console.log(allItems)
+                        } else {
+                            const newCart = new CartItem({ itemId: args.itemId })
+                            allItems = [...res.cartItems, ...[newCart]]
+                            console.log("new" +allItems)
+                        }
+                        
                         UserItem.findOneAndUpdate({ userId: id },
                             {
                                 $set: {
-                                    cartItems: [...res.cartItems, ...[args.itemId]],
+                                    cartItems: allItems,
                                     updateDate: Date.now()
                                 }
                             }, { new: true }).exec(
@@ -74,11 +94,13 @@ export default {
                     } else if (res === null) {
                         reject("Item already unfaviorite.")
                     } else {
-                        let faviouriteItems = args.faviouriteItems
-            
+                        const faviouriteItems = res.faviouriteItems.filter(id => {
+                            return id !== args.itemId
+                        })
                         UserItem.findOneAndUpdate({ userId: id },
                             {
                                 $set: {
+                                    faviouriteItems: faviouriteItems,
                                     updateDate: Date.now()
                                 }
                             }, { new: true }).exec(
@@ -91,5 +113,51 @@ export default {
 
             });
         },
+        deleteCartItem: (root, args) => {
+            return new Promise((resolve, reject) => {
+                const id = args.userId
+                UserItem.findOne({ userId: id }).exec((err, res) => {
+                    if (err) {
+                        reject(err)
+                    } else if (res === null) {
+                        reject("Item already removed from cart.")
+                    } else {
+                        const filterItem = res.cartItems.filter(cartItem => {
+                            return cartItem.itemId == args.itemId
+                        })
+                        console.log("yes" + filterItem)
+                        let allItems = res.cartItems
+                        if(filterItem.length > 0 && filterItem[0].count == 1){
+                            allItems = res.cartItems.filter(cartItem => {
+                                return cartItem.itemId !== args.itemId
+                            })
+                        }
+                        else if (filterItem.length > 0) {
+                            allItems = res.cartItems.map(cartItem => {
+                                if (cartItem.itemId === args.itemId) {
+                                    cartItem.count = cartItem.count - 1
+                                }
+                                return cartItem
+                            })
+                        } else {
+                            reject("Item already removed from cart.")
+                        }
+                        
+                        UserItem.findOneAndUpdate({ userId: id },
+                            {
+                                $set: {
+                                    cartItems: allItems,
+                                    updateDate: Date.now()
+                                }
+                            }, { new: true }).exec(
+                                (err, res) => {
+                                    err ? reject(err) : resolve(res);
+                                }
+                            );
+                    }
+                });
+
+            });
+        }
     }
 };
