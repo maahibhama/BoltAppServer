@@ -10,6 +10,7 @@ export default `
     discountInPercentage: String
     rating: String
     ratingType: String
+    imageUrls: [String]!
     availableSize: [String]!
     availableColor: [String]!
     createDate: String
@@ -21,8 +22,8 @@ export default `
     filterItem(name: String, category: String, company: String, type: String, size: [String], color: [String], rating: String): [Item]
   }
   type Mutation {
-    addItem(name: String!, orignalprice: String!, discountInPercentage: String, description: String!, category: String!, company: String!, type: String!, rating: String, ratingType: String, availableSize: [String]!, availableColor: [String]!): Item
-    editItem(id: String!, name: String, orignalprice: String, discountInPercentage: String, description: String, category: String, company: String, type: String, rating: Float, ratingType: String, availableSize: [String], availableColor: [String]): Item
+    addItem(name: String!, orignalprice: String!, discountInPercentage: String, description: String!, category: String!, company: String!, type: String!, rating: String, ratingType: String, imageUrls: [String]!, availableSize: [String]!, availableColor: [String]!): Item
+    editItem(id: String!, name: String, orignalprice: String, discountInPercentage: String, description: String, category: String, company: String, type: String, rating: Float, ratingType: String, imageUrls: [String]!, availableSize: [String], availableColor: [String]): Item
     deleteItem(id: String): Item
   }
 `;
