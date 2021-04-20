@@ -74,7 +74,7 @@ const UserSchema = new Schema({
     type: String,
     default: "",
   },
-  plans: [Plan]
+
 });
 
 const User = mongoose.model("User", UserSchema);
