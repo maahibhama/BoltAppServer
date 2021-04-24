@@ -2,6 +2,25 @@ import Vehical from "../../../models/Vehical";
 var mongodb = require("mongodb");
 
 export default {
+  Query: {
+    vehical: (root, args) => {
+      return new Promise((resolve, reject) => {
+        Vehical.findOne({ _id: args.name }).exec((err, res) => {
+          console.log(res);
+          err ? reject(err) : resolve(res);
+        });
+      });
+    },
+    vehicals: () => {
+      return new Promise((resolve, reject) => {
+        Vehical.find({})
+          .populate()
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
+      });
+    },
+  },
   Mutation: {
     addVehical: (
       root,
