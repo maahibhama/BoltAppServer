@@ -54,7 +54,7 @@ export default {
       return new Promise((resolve, reject) => {
         const name = args.name;
         const vehical_no = args.vehical_no;
-        delete args.id;
+        delete args.name;
         delete args.vehical_no;
 
         Vehical.findOneAndUpdate(
