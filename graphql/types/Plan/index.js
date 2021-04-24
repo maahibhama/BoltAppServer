@@ -2,7 +2,7 @@ export default `
   type Plan {
     name : String!,
     description: String!,
-    price: Number!,
+    price: String!,
     rating:String,
     rating_comments: [String]
   }
@@ -13,19 +13,19 @@ export default `
   type Mutation {
     addPlan(name : String!,
       description: String!,
-      price: Number!,
+      price: String!,
       rating:String,
       rating_comments: [String]): Plan
 
     editPlan(name : String!,
       description: String!,
-      price: Number!,
+      price: String!,
       rating:String,
       rating_comments: [String]) : Plan
 
     deletePlan(name : String!,
       description: String!,
-      price: Number!,
+      price: String!,
       rating:String,
       rating_comments: [String]): Plan
   }
