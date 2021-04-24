@@ -52,11 +52,13 @@ export default {
     },
     editVehical: (root, args) => {
       return new Promise((resolve, reject) => {
-        const id = args.id;
+        const name = args.name;
+        const vehical_no = args.vehical_no;
         delete args.id;
+        delete args.vehical_no;
 
         Vehical.findOneAndUpdate(
-          { _id: id },
+          { _name: name, _vehical_no: vehical_no },
           { $set: args },
           { new: true }
         ).exec((err, res) => {
