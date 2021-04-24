@@ -37,7 +37,7 @@ export default {
       });
 
       return new Promise((resolve, reject) => {
-        Vehical.findOne({ name }).exec((err, res) => {
+        Vehical.findOne({ name, vehical_no }).exec((err, res) => {
           if (err) {
             reject(err);
           } else if (res === null) {
