@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 // Create the Item Schema.
 const SlotSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+  },
   startTime: {
     type: Date,
     default: Date.now(),
