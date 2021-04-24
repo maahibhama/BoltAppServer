@@ -1,6 +1,25 @@
 import Plan from "../../../models/Plan";
 var mongodb = require("mongodb");
 export default {
+  Query: {
+    plan: (root, args) => {
+      return new Promise((resolve, reject) => {
+        Plan.findOne({ _name: args.name }).exec((err, res) => {
+          console.log(res);
+          err ? reject(err) : resolve(res);
+        });
+      });
+    },
+    plans: () => {
+      return new Promise((resolve, reject) => {
+        Plan.find({})
+          .populate()
+          .exec((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
+      });
+    },
+  },
   Mutation: {
     addPlan: (root, { name, description, price, rating, rating_comments }) => {
       const newPlan = Plan({
