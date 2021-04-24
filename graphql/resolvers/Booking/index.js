@@ -1,28 +1,28 @@
-import Item from "../../../models/Item";
+import Booking from "../../../models/Booking";
 var mongodb = require('mongodb');
 
 export default {
   Query: {
-    item: (root, args) => {
+    booking: (root, args) => {
       return new Promise((resolve, reject) => {
-        Item.findOne({ _id: args.id }).exec((err, res) => {
+        Booking.findOne({ _id: args.id }).exec((err, res) => {
           console.log(res)
           err ? reject(err) : resolve(res);
         });
       });
     },
-    items: () => {
+    bookings: () => {
       return new Promise((resolve, reject) => {
-        Item.find({})
+        Booking.find({})
           .populate()
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
           });
       });
     },
-    filterItem:(root, args) => {
+    filterBooking:(root, args) => {
       return new Promise((resolve, reject) => {
-        Item.find(args)
+        Booking.find(args)
           .populate()
           .exec((err, res) => {
             err ? reject(err) : resolve(res);
@@ -31,11 +31,11 @@ export default {
     }
   },
   Mutation: {
-    addItem: (root, args) => {
-      const newItem = new Item(args);
+    addBooking: (root, args) => {
+      const newItem = new Booking(args);
 
       return new Promise((resolve, reject) => {
-        Item.findOne({ name:args.name, company: args.company, category: args.category, type: args.type }).exec((err, res) => {
+        Booking.findOne({ name:args.name, company: args.company, category: args.category, type: args.type }).exec((err, res) => {
           if (err) {
             reject(err)
           } else if (res === null) {
@@ -43,28 +43,28 @@ export default {
               err ? reject(err) : resolve(res);
             });
           } else {
-            reject("Item is already exists.")
+            reject("Booking is already exists.")
           }
         });
 
       });
     },
-    editItem: (root, args) => {
+    editBooking: (root, args) => {
       return new Promise((resolve, reject) => {
         const id = args.id
         delete args.id
         args.updateDate = Date.now()
 
-        Item.findOneAndUpdate({ _id: id }, { $set: args }, { new: true }).exec(
+        Booking.findOneAndUpdate({ _id: id }, { $set: args }, { new: true }).exec(
           (err, res) => {
             err ? reject(err) : resolve(res);
           }
         );
       });
     },
-    deleteItem: (root, args) => {
+    deleteBooking: (root, args) => {
       return new Promise((resolve, reject) => {
-        Item.findOneAndRemove(args).exec((err, res) => {
+        Booking.findOneAndRemove(args).exec((err, res) => {
           err ? reject(err) : resolve(res);
         });
       });

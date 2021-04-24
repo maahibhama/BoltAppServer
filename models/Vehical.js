@@ -30,7 +30,8 @@ const VehicalSchema = new Schema({
     required: true,
   },
   slots: {
-    type: [Slot]
+    type: [Slot],
+    default: []
   }
 });
 

@@ -13,13 +13,13 @@ export default `
     plan_rating_comment: String!
   }
   type Query {
-    booking(id: String!): Item
-    userBookings: [Item]
-    filterItem(name: String, category: String, company: String, type: String, size: [String], color: [String], rating: String): [Item]
+    booking(id: String!): Booking
+    bookings: [Booking]
+    filterBooking(slot_id: String, price: String, payment_mode: String, payment_status: String, status: String): [Booking]
   }
   type Mutation {
-    addBooking(name: String!, orignalprice: String!, discountInPercentage: String, description: String!, category: String!, company: String!, type: String!, rating: String, ratingType: String, availableSize: [String]!, availableColor: [String]!): Item
-    editBooking(id: String!, name: String, orignalprice: String, discountInPercentage: String, description: String, category: String, company: String, type: String, rating: Float, ratingType: String, availableSize: [String], availableColor: [String]): Item
-    deleteBooking(id: String): Item
+    addBooking(name: String!, orignalprice: String!, discountInPercentage: String, description: String!, category: String!, company: String!, type: String!, rating: String, ratingType: String, availableSize: [String]!, availableColor: [String]!): Booking
+    editBooking(id: String!, name: String, orignalprice: String, discountInPercentage: String, description: String, category: String, company: String, type: String, rating: Float, ratingType: String, availableSize: [String], availableColor: [String]): Booking
+    deleteBooking(id: String): Booking
   }
 `;
