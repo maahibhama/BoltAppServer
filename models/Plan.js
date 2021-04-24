@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 // Create the Item Schema.
 const PlanSchema = new Schema({
+  id: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
