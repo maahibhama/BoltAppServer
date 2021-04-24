@@ -31,8 +31,8 @@ const VehicalSchema = new Schema({
   },
   slots: {
     type: [Slot],
-    default: []
-  }
+    default: [],
+  },
 });
 
 const Vehical = mongoose.model("Vehical", VehicalSchema);
