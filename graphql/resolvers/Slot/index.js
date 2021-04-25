@@ -1,11 +1,11 @@
-import Slot from "../../../models/Plan";
+import Slot from "../../../models/Slot";
 var mongodb = require("mongodb");
 
 export default {
   Query: {
     slot: (root, args) => {
       return new Promise((resolve, reject) => {
-        Slot.findOne({ id: args.id }).exec((err, res) => {
+        Slot.findOne({ _id: args.id }).exec((err, res) => {
           console.log(res);
           err ? reject(err) : resolve(res);
         });
@@ -68,6 +68,7 @@ export default {
         delete args.id;
 
         Slot.findOneAndUpdate(
+          { _id: id },
           { startTime: startTime },
           { $set: args },
           { new: true }
