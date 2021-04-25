@@ -5,7 +5,7 @@ export default {
   Query: {
     vehical: (root, args) => {
       return new Promise((resolve, reject) => {
-        Vehical.findOne({ _id: args.name }).exec((err, res) => {
+        Vehical.findOne({ _id: args.id }).exec((err, res) => {
           console.log(res);
           err ? reject(err) : resolve(res);
         });
@@ -58,7 +58,7 @@ export default {
         delete args.vehical_no;
 
         Vehical.findOneAndUpdate(
-          { _name: name, _vehical_no: vehical_no },
+          { name: name, vehical_no: vehical_no },
           { $set: args },
           { new: true }
         ).exec((err, res) => {

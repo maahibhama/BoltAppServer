@@ -1,33 +1,43 @@
 export default `
 	type Slot{
-		id: String!,
-        start_time: Date,
-        durationInMinutes: Number,
+        start_time: String,
+        durationInMinutes: Int,
         washer_id: String,
         client_id: String,
         vehical_id: String,
-        availablity : boolean,
+        availablity : Boolean,
         plan_id : String,
         booking_id : String,
         status : String,
 	}
 	type Query{
-		slot(id: String!) : Slot
-		slots: [Slot]
+		slot(start_time : String!) : Slot
+		slots: Slot
 	}
 	type Mutation{
-		addSlot(id: String!,
-			start_time: Date,
-			durationInMinutes: Number,
+		addSlot(
+			start_time: String!,
+			durationInMinutes: Int!,
 			washer_id : String,
 			client_id : String,
 			vehical_id : String,
-			availablity : boolean,
+			availablity : Boolean,
+			plan_id : String,
+			booking_id : String,
+			status : String )
+			: Slot
+
+		editSlot(
+			start_time: String,
+			durationInMinutes: Int,
+			washer_id : String,
+			client_id : String,
+			vehical_id : String,
+			availablity : Boolean,
 			plan_id : String,
 			booking_id : String,
 			status : String) : Slot
 
-		editSlot(id: String!) : Slot
 		deleteSlot(id: String!) : Slot
 	}
 `;

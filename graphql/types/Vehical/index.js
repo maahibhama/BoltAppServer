@@ -1,12 +1,11 @@
-export default `
-  type Vehical {
+export default `type Vehical {
     name: String!,
 	 type: String!,
 	 brand: String!,
-	 year: Number!,
+	 year: Int!,
 	 vehical_no: String!,
 	 client_id: String!,
-	 slots: [Slot]
+	 slots: [String],
   }
   type Query {
 	  vehical(name: String!): Vehical
@@ -14,9 +13,31 @@ export default `
   }
   type Mutation {
 
-	addVehical(name:String!, type: String!, brand:String!, year:Number!, vehical_no:String!, client_id:String!, slots:[Slot]): Vehical
-	editVehical(name:String!, type: String!, brand:String!, year:Number!, vehical_no:String!, client_id:String!, slots:[Slot]): Vehical
-	deleteVehical(name:String!, type: String!, brand:String!, year:Number!, vehical_no:String!) : Vehical
+	  editVehical(
+		  	name:String!,
+			type: String!,
+			brand:String!,
+			year:Int!,
+			vehical_no:String!,
+			client_id:String!,
+			slots: [String]): Vehical
+			addVehical(name:String!,
+			type: String!,
+			brand:String!,
+			year:Int!,
+			vehical_no:String!,
+			client_id:String!,
+			slots: [String]
+		): Vehical
 
-  }
-`;
+		deleteVehical(
+			name:String!,
+			type: String!,
+			brand:String!,
+			year:Int!,
+			vehical_no:String!,
+			client_id:String!,
+			slots: [String]
+			) : Vehical
+
+  }`;

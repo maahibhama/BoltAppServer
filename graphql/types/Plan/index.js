@@ -3,7 +3,7 @@ export default `
     name : String!,
     description: String!,
     price: String!,
-    rating:String,
+    rating: Float,
     rating_comments: [String]
   }
   type Query {
@@ -13,20 +13,20 @@ export default `
   type Mutation {
     addPlan(name : String!,
       description: String!,
-      price: String!,
-      rating:String,
+      price: Int!,
+      rating: Float,
       rating_comments: [String]): Plan
 
     editPlan(name : String!,
       description: String!,
-      price: String!,
-      rating:String,
+      price: Int!,
+      rating: Float,
       rating_comments: [String]) : Plan
 
     deletePlan(name : String!,
       description: String!,
-      price: String!,
-      rating:String,
+      price: Int!,
+      rating: Float,
       rating_comments: [String]): Plan
   }
 `;

@@ -4,10 +4,6 @@ const Schema = mongoose.Schema;
 
 // Create the Item Schema.
 const PlanSchema = new Schema({
-  id: {
-    type: String,
-    required: true,
-  },
   name: {
     type: String,
     required: true,
@@ -21,8 +17,8 @@ const PlanSchema = new Schema({
     required: true,
   },
   rating: {
-    type: String,
-    default: "0.0",
+    type: Number,
+    default: 0.0,
   },
   rating_comments: {
     type: [String],

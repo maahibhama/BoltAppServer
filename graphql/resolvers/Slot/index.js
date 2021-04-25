@@ -25,7 +25,6 @@ export default {
     addSlot: (
       root,
       {
-        id,
         start_time,
         durationInMinutes,
         washer_id,
@@ -38,7 +37,6 @@ export default {
       }
     ) => {
       const newSlot = new Slot({
-        id,
         start_time,
         durationInMinutes,
         washer_id,
@@ -51,7 +49,7 @@ export default {
       });
 
       return new Promise((resolve, reject) => {
-        Slot.findOne({ id }).exec((err, res) => {
+        Slot.findOne({ start_time }).exec((err, res) => {
           if (err) {
             reject(err);
           } else if (res === null) {
@@ -66,10 +64,10 @@ export default {
     },
     editSlot: (root, args) => {
       return new Promise((resolve, reject) => {
-        const id = args.id;
+        const id = args._id;
         delete args.id;
 
-        Slot.findOneAndUpdate({ _id: id }, { $set: args }, { new: true }).exec(
+        Slot.findOneAndUpdate({ id: id }, { $set: args }, { new: true }).exec(
           (err, res) => {
             err ? reject(err) : resolve(res);
           }
@@ -78,7 +76,7 @@ export default {
     },
     deleteSlot: (root, args) => {
       return new Promise((resolve, reject) => {
-        Slot.findOneAndRemove(args.id).exec((err, res) => {
+        Slot.findOneAndRemove(args).exec((err, res) => {
           err ? reject(err) : resolve(res);
         });
       });
