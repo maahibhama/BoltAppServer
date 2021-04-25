@@ -1,6 +1,6 @@
 export default `
 	type Slot{
-        start_time: String,
+        startTime: String,
         durationInMinutes: Int,
         washer_id: String,
         client_id: String,
@@ -11,12 +11,12 @@ export default `
         status : String,
 	}
 	type Query{
-		slot(start_time : String!) : Slot
+		slot(startTime : String!) : Slot
 		slots: Slot
 	}
 	type Mutation{
 		addSlot(
-			start_time: String!,
+			startTime: String!,
 			durationInMinutes: Int!,
 			washer_id : String,
 			client_id : String,
@@ -28,7 +28,7 @@ export default `
 			: Slot
 
 		editSlot(
-			start_time: String,
+			startTime: String,
 			durationInMinutes: Int,
 			washer_id : String,
 			client_id : String,
