@@ -1,1 +1,2 @@
-export const databasePath = "mongodb+srv://maahibhama:Maahi@123@boltappserver-e5hfp.gcp.mongodb.net/test?retryWrites=true"
+export const databasePath =
+  "mongodb+srv://test:test@cluster0.rjgoj.mongodb.net/test?retryWrites=true";
