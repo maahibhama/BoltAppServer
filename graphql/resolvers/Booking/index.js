@@ -36,7 +36,6 @@ export default {
 
       return new Promise((resolve, reject) => {
         Booking.findOne({
-          _id: args.id,
           slot_id: args.slot_id,
           price: args.price,
           description: args.description,

@@ -18,7 +18,7 @@ export default `
     filterBooking(slot_id: String, price: String, payment_mode: String, payment_status: String, status: String): [Booking]
   }
   type Mutation {
-    addBooking(id: String!
+    addBooking(
       slot_id: String!
       price: String!
       description: String!
