@@ -8,6 +8,7 @@ export default `
     city: String
     gender: String
     phoneNumber: String
+    type:String
     createDate: String
     updateDate: String
     receiveNotification: Boolean,
@@ -21,8 +22,8 @@ export default `
     loginUser(email: String!, password: String!): User
   }
   type Mutation {
-    addUser(name: String!, email: String!, password: String!, address: String, city: String, gender: String, phoneNumber: String): User
-    editUser(id: String!, name: String, email: String, password: String, address: String, city: String, gender: String, phoneNumber: String): User
+    addUser(name: String!, email: String!, password: String!, address: String, city: String, gender: String, phoneNumber: String, type:String): User
+    editUser(id: String!, name: String, email: String, password: String, address: String, city: String, gender: String, phoneNumber: String, type:String): User
     deleteUser(id: String, email: String): User
     changePasswordUser(id: String!, currentPassword: String!, newPassword: String!): User
     changeUserService(id: String!, receiveNotification: Boolean, receiveNewsletters: Boolean, receiveSpecialOffer: Boolean, participateBetaProgramme: Boolean): User
